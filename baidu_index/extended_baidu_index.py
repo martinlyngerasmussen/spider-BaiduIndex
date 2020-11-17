@@ -10,7 +10,7 @@ from . import utils
 
 class ExtendedBaiduIndex:
     """
-        百度搜索指数(获取咨询指数或者媒体指数)
+        Baidu search index (get consulting index or media index)
         :keywords; list
         :start_date; string '2018-10-02'
         :end_date; string '2018-10-02'
@@ -43,8 +43,8 @@ class ExtendedBaiduIndex:
 
     def get_index(self):
         """
-        获取百度指数
-        返回的数据格式为:
+        Get Baidu Index
+        The format of the returned data is:
         {
             'keyword': '武林外传',
             'type': 'wise',
@@ -98,7 +98,7 @@ class ExtendedBaiduIndex:
 
     def _format_data(self, data):
         """
-            格式化堆在一起的数据
+            Format piled data
         """
         keyword = str(data['key'])
         start_date = datetime.datetime.strptime(data['startDate'], '%Y-%m-%d')
