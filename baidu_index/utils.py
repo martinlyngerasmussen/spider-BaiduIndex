@@ -18,7 +18,7 @@ headers = {
 
 def get_time_range_list(startdate, enddate):
     """
-        切分时间段
+        Split time period
     """
     date_range_list = []
     startdate = datetime.datetime.strptime(startdate, '%Y-%m-%d')
@@ -35,14 +35,15 @@ def get_time_range_list(startdate, enddate):
 
 def split_keywords(keywords: list) -> [list]:
     """
-    一个请求最多传入5个关键词, 所以需要对关键词进行切分
+    A request can pass in 5 keywords at most, 
+    so the keywords need to be segmented
     """
     return [keywords[i*5: (i+1)*5] for i in range(math.ceil(len(keywords)/5))]
 
 
 def get_params_queue(start_date, end_date, keywords):
     """
-        获取参数队列
+        Get parameter queue
     """
     params_queue = queue.Queue()
     keywords_list = split_keywords(keywords)
@@ -60,9 +61,9 @@ def get_params_queue(start_date, end_date, keywords):
 
 def http_get(url, cookies):
     """
-        发送get请求, 程序中所有的get都是调这个方法
-        如果想使用多cookies抓取, 和请求重试功能
-        在这自己添加
+        Send a get request, all get in the program call this method
+         If you want to use multiple cookies crawling, and request retry function
+         Add yourself here
     """
     _headers = headers.copy()
     _headers['Cookie'] = cookies
@@ -84,7 +85,7 @@ def get_key(uniqid, cookies):
 
 def decrypt_func(key, data):
     """
-        数据解密方法
+        Data decryption method
     """
     a = key
     i = data
@@ -99,7 +100,8 @@ def decrypt_func(key, data):
 
 def sleep_func():
     """
-        sleep方法, 单账号抓取过快, 一段时间内请求会失败
+        Sleep method, single account crawling is too fast, 
+        the request will fail for a period of time
     """
     sleep_time = random.choice(range(50, 90)) * 0.1
     time.sleep(sleep_time)
@@ -107,7 +109,7 @@ def sleep_func():
 
 def test_cookies(cookies):
     """
-        测试cookie是否可用
+        Test whether the cookie is available
     """
     html = http_get('https://www.baidu.com/', cookies)
     return '退出' in html
